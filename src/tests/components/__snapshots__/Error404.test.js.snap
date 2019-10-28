@@ -3,10 +3,10 @@
 exports[`should render Error404 correctly 1`] = `
 <div>
   Error404
-  <[object Object]
+  <Link
     to="/"
   >
     back to home page
-  </[object Object]>
+  </Link>
 </div>
 `;

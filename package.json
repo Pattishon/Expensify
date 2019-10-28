@@ -8,7 +8,7 @@
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
-    "test": "jest",
+    "test": "jest --config=jest.config.json",
     "start": "node server/server.js",
     "heroku-postbuild": "yarn run build:prod"
   },
@@ -27,10 +27,12 @@
     "moment": "2.18.1",
     "node-sass": "4.13.0",
     "normalize.css": "7.0.0",
-    "react": "15.6.1",
+    "numeral": "^2.0.6",
+    "raf": "3.3.2",
+    "react": "16.0.0",
     "react-addons-shallow-compare": "15.6.0",
     "react-dates": "12.3.0",
-    "react-dom": "15.6.1",
+    "react-dom": "16.0.0",
     "react-modal": "2.2.2",
     "react-redux": "5.0.5",
     "react-router-dom": "5.1.2",
@@ -43,11 +45,12 @@
     "webpack": "3.1.0"
   },
   "devDependencies": {
-    "enzyme": "2.9.1",
-    "enzyme-to-json": "1.5.1",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "3.0.1",
     "jest": "20.0.4",
     "js-yaml": "^3.13.1",
-    "react-test-renderer": "15.6.1",
+    "react-test-renderer": "16.0.0",
     "webpack-dev-server": "2.5.1"
   }
 }
