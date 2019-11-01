@@ -1,3 +1,5 @@
+import { Actions } from "../actions/expenses";
+
 const expensesReducerDefaultState = [];
 
 export default (state = expensesReducerDefaultState, action) => {
@@ -16,6 +18,8 @@ export default (state = expensesReducerDefaultState, action) => {
           };
         } else return expense;
       });
+    case Actions.SET_EXPENSES:
+      return action.expenses;
     default:
       return state;
   }
