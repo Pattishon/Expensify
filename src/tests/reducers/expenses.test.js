@@ -22,7 +22,7 @@ test("should add expense to the state", () => {
 });
 
 test("should remove expense from state", () => {
-  const action = { type: "REMOVE_EXPENSE", id: 1 };
+  const action = { type: "REMOVE_EXPENSE", id: "1" };
   const state = expensesReducer(expenses, action);
   expect(state).toEqual([expenses[1], expenses[2]]);
 });
