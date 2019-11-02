@@ -8,6 +8,7 @@ import {
   setExpenses,
   startSetExpenses,
   startRemoveExpense,
+  startEditExpense,
   Actions
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
@@ -111,28 +112,36 @@ test("should add expense with defaults to database and store", done => {
     });
 });
 
-// test("should generate add expense action obj with default values", () => {
-//   const action = addExpense();
-//   expect(action).toEqual({
-//     type: "ADD_EXPENSE",
-//     expense: {
-//       id: expect.any(String),
-//       description: "",
-//       note: "",
-//       amount: 0,
-//       createdAt: 0
-//     }
-//   });
-// });
-
 test("should generate edit expense action obj", () => {
   const updates = { note: "changed note" };
   const action = editExpense("123abc", updates);
   expect(action).toEqual({
-    type: "EDIT_EXPENSE",
+    type: Actions.EDIT_EXPENSE,
     id: "123abc",
     updates
   });
+});
+
+test("should edit expense in store and firebase", done => {
+  const store = createMockStore();
+  const { id } = expenses[1];
+  const updates = { note: "changed note for firebase" };
+
+  store
+    .dispatch(startEditExpense(id, updates))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: Actions.EDIT_EXPENSE,
+        id,
+        updates
+      });
+      return database.ref(`expenses/${actions[0].id}`).once("value");
+    })
+    .then(snapshot => {
+      expect(snapshot.val().note).toBe(updates.note);
+      done();
+    });
 });
 
 test("should generate setExpenses action object with data", () => {

@@ -2,9 +2,12 @@ import uuid from "uuid";
 import database from "../firebase/firebase";
 
 export const Actions = {
+  EDIT_EXPENSE: "EDIT_EXPENSE",
   SET_EXPENSES: "SET_EXPENSES",
   REMOVE_EXPENSE: "REMOVE_EXPENSE"
 };
+
+//ADD
 
 export const addExpense = expense => ({
   type: "ADD_EXPENSE",
@@ -36,6 +39,8 @@ export const startAddExpense = (expenseData = {}) => {
   };
 };
 
+//REMOVE
+
 export const removeExpense = id => ({
   type: Actions.REMOVE_EXPENSE,
   id
@@ -51,11 +56,27 @@ export const startRemoveExpense = id => {
       });
   };
 };
+
+//EDIT
+
 export const editExpense = (id, updates) => ({
-  type: "EDIT_EXPENSE",
+  type: Actions.EDIT_EXPENSE,
   id,
   updates
 });
+
+export const startEditExpense = (id, updates) => {
+  return dispatch => {
+    return database
+      .ref(`expenses/${id}`)
+      .update(updates)
+      .then(() => {
+        dispatch(editExpense(id, updates));
+      });
+  };
+};
+
+//SET
 
 export const setExpenses = expenses => ({
   type: Actions.SET_EXPENSES,
