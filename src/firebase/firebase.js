@@ -14,22 +14,8 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+googleAuthProvider.setCustomParameters({
+  prompt: "select_account"
+});
 
 export { firebase, googleAuthProvider, database as default };
-
-// database.ref().set({
-//   name: "Patti Adams",
-//   age: 29,
-//   isSingle: false,
-//   address: {
-//     city: "Kraków",
-//     country: "Poland"
-//   }
-// });
-
-// database.ref("age").set(30);
-// database.ref("address/city").set("Chrzanów");
-// database.ref("attributes").set({
-//   height: 175,
-//   weight: 65
-// });
