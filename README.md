@@ -1,1 +1,1 @@
-indecission-app
+Expensify App
